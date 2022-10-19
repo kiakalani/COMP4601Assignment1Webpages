@@ -70,8 +70,6 @@ for i in range(COUNT_PAGES):
     links = []
     for j in range(randint(1, MAX_PARAGRAPH_COUNTS)):
         random_item = PERSONAL_KEYWORDS[randint(0, len(PERSONAL_KEYWORDS) - 1)]
-        while random_item in paragraphs:
-            random_item = PERSONAL_KEYWORDS[randint(0, len(PERSONAL_KEYWORDS) - 1)]
         paragraphs.append(random_item)
     for j in range(randint(1, MAX_LINK_COUNTS)):
         random_link = naming_convention.format(num=randint(0, COUNT_PAGES - 1))
