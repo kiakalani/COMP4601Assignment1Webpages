@@ -34,12 +34,12 @@ PERSONAL_KEYWORDS = [
 ]
 
 # We need between 500-1000 pages to crawl. Why not 999 :)
-COUNT_PAGES = 10
+COUNT_PAGES = 999
 
 # So we would not have more than the count of paragraphs
-MAX_PARAGRAPH_COUNTS = 5
+MAX_PARAGRAPH_COUNTS = 25
 
-MAX_LINK_COUNTS = 5
+MAX_LINK_COUNTS = 20
 
 naming_convention = 'Personal_{num}'
 
