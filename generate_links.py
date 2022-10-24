@@ -41,6 +41,8 @@ MAX_PARAGRAPH_COUNTS = 25
 
 MAX_LINK_COUNTS = 20
 
+REFERENCED_LINKS = set()
+
 naming_convention = 'Personal_{num}'
 
 def create_html(title: str, paragraphs: list[str], links: list[str]) -> str:
@@ -64,6 +66,12 @@ def create_html(title: str, paragraphs: list[str], links: list[str]) -> str:
     html_text += "</body></html>"
     return html_text
 
+def find_not_referenced_link():
+    while True:
+        link = naming_convention.format(num=randint(0, COUNT_PAGES - 1))
+        if link not in REFERENCED_LINKS:
+            return link
+
 for i in range(COUNT_PAGES):
     title = naming_convention.format(num=i)
     paragraphs = []
@@ -73,9 +81,14 @@ for i in range(COUNT_PAGES):
         paragraphs.append(random_item)
     for j in range(randint(1, MAX_LINK_COUNTS)):
         random_link = naming_convention.format(num=randint(0, COUNT_PAGES - 1))
+        REFERENCED_LINKS.add(random_link)
         while random_link in links or random_link == title:
             random_link = naming_convention.format(num=randint(0, COUNT_PAGES - 1))
         links.append(random_link)
+    # Making sure that all links are included in graph
+    if len(REFERENCED_LINKS) != COUNT_PAGES:
+        links.append(find_not_referenced_link())
+
     file = open(title + ".html", "w")
     file.write(create_html(title, paragraphs, links))
     file.close()
